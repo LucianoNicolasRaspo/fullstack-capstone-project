@@ -1,9 +1,10 @@
 require('dotenv').config();
 const { MongoClient } = require('mongodb');
 
+const url = process.env.MONGO_URL;
+
 let dbInstance = null;
 const dbName = "giftdb";
-const url = process.env.MONGO_URL;
 
 async function connectToDatabase() {
     if (dbInstance) {
