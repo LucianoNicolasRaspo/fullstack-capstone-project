@@ -11,7 +11,9 @@ const Profile = () => {
  const [changed, setChanged] = useState("");
 
  const [editMode, setEditMode] = useState(false);
+
   const navigate = useNavigate();
+
   useEffect(() => {
     const authtoken = sessionStorage.getItem("auth-token");
     if (!authtoken) {
@@ -66,14 +68,23 @@ const handleSubmit = async (e) => {
     const payload = { ...updatedDetails };
     const response = await fetch(`${urlConfig.backendUrl}/api/auth/update`, {
       //Step 1: Task 1
-      //Step 1: Task 2
+      method: "PUT",
+      headers: {      //Step 1: Task 2
+        "Authorization": `Bearer ${authtoken}`,
+        "Content-Type": "application/json",
+        "Email": email,
+      },
       //Step 1: Task 3
+      body: JSON.stringify(payload),
     });
 
     if (response.ok) {
       // Update the user details in session storage
       //Step 1: Task 4
-      //Step 1: Task 5
+      setUserName(updatedDetails.name);
+      //Step 1: Task 5      
+      sessionStorage.setItem("name", updatedDetails.name);
+
       setUserDetails(updatedDetails);
       setEditMode(false);
       // Display success message to the user
