@@ -44,6 +44,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
+          jshint esversion: 8
           node-version: 14
 
       - name: Run build
